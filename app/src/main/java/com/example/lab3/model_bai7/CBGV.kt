@@ -1,9 +1,28 @@
 package com.example.lab3.model_bai7
 
-class CBGV (maGV: String, hoTen: String, tuoi: Int, queQuan: String, var luongCung: Double, var luongThuong: Double, var tienPhat: Double)
-: Nguoi(maGV, hoTen, tuoi, queQuan) {
+public class CBGV : Nguoi  {
 
-    fun luongThucLinh(): Double {
-        return luongCung + luongThuong - tienPhat
+    var luongcung: Float
+    var luongthuong: Float?
+    var tienphat: Float?
+    var luongthuclinh: Float = 0f
+        get() = luongcung + (luongthuong?:0f) - (tienphat?:0f)
+
+    constructor(
+        magv: String,
+        hoten: String,
+        tuoi: Int?,
+        quequan: String,
+        luongcung: Float,
+        luongthuong: Float?,
+        tienphat: Float?
+    ) : super(magv, hoten, tuoi, quequan) {
+        this.luongcung = luongcung
+        this.luongthuong = luongthuong
+        this.tienphat = tienphat
+    }
+
+    override fun getThongTin(): String {
+        return "CBGV:" + super.getThongTin() + ", luong cung: $luongcung, luong thuong: $luongthuong, tien phat: $tienphat"
     }
 }

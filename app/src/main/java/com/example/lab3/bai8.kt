@@ -12,7 +12,7 @@ fun main() {
     listThe.add(tm2)
 
     do {
-        println("------Chuc nang-------")
+        println("------Quản lý thẻ mượn-------")
         println("1. Xem danh sach the muon")
         println("2. Them the muon")
         println("3. Xoa the muon")
@@ -22,7 +22,9 @@ fun main() {
 
         when (s) {
             1 -> {
-                getThongTin(listThe)
+                for ( i in listThe){
+                    println(i.getThongTin())
+                }
             }
             2 -> {
                 addTheMuon(listThe)
@@ -37,45 +39,40 @@ fun main() {
 
         }
 
-        print("Ban co muon tiep tuc khong? (y/n): ")
+        print("Bạn có muốn tiếp tục không ? (y/n): ")
         var check = readLine()
         if (check.equals("n"))
             break
     } while (true)
 }
 
-fun getThongTin(listThe: MutableList<TheMuon>) {
-    println("Thong tin cac the muon!")
-    for (tm in listThe) {
-        println("Ma the muon: ${tm.mapm}, Ho ten: ${tm.hoten}, Tuoi: ${tm.tuoi}, Lop: ${tm.lop}, Ngay muon: ${tm.ngaymuon}, Han tra: ${tm.hantra}, So hieu sach: ${tm.sohieusach}")
-    }
-}
-
 fun addTheMuon(listThe: MutableList<TheMuon>) {
-    print("Nhap ma the muon: ")
+    print("Nhập mã thẻ mượn: ")
     var matm = readLine()
-    print("Nhap ho ten sinh vien: ")
+    print("Nhập họ tên sinh viên: ")
     var hoten = readLine()
-    print("Nhap tuoi: ")
+    print("Nhập tuổi: ")
     var tuoi = readLine()!!.toInt()
-    print("Nhap lop: ")
+    print("Nhập lớp: ")
     var lop = readLine()
-    print("Ngay muon: ")
+    print("Ngày mượn: ")
     var ngaymuon = readLine()!!.toInt()
-    print("Han tra: ")
+    print("Hạn trả: ")
     var hantra = readLine()!!.toInt()
-    print("So hieu sach: ")
+    print("Số hiệu sách: ")
     var sohieusach = readLine()
 
     val tm = TheMuon(hoten!!, tuoi, lop!!, matm!!, ngaymuon, hantra, sohieusach!!)
 
     listThe.add(tm)
 
-    getThongTin(listThe)
+    for ( i in listThe){
+        println(i.getThongTin())
+    }
 }
 
 fun deleteTheMuon(listThe: MutableList<TheMuon>) {
-    print("Nhap ma the muon can xoa: ")
+    print("Nhập mã thẻ muượn cần xóa: ")
     var matm = readLine()
     var check = false
     for (tm in listThe) {
@@ -86,6 +83,8 @@ fun deleteTheMuon(listThe: MutableList<TheMuon>) {
         }
     }
     if (check == false)
-        println("The muon khong ton tai")
-    getThongTin(listThe)
+        println("Thẻ mượn không tồn tại")
+    for ( i in listThe){
+        println(i.getThongTin())
+    }
 }

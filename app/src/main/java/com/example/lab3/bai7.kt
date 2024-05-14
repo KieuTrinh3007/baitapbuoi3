@@ -6,14 +6,14 @@ fun main() {
 
     var listCBGV = mutableListOf<CBGV>()
 
-    val cbgv = CBGV("GV01", "Bui Thanh Nguyen", 30, "Nam Dinh", 15000.0, 10200.0, 200.0)
-    val cbgv1 = CBGV("GV02", "Trinh Xuan Mai", 25, "Nam Dinn", 20000.0, 10200.0, 200.0)
+    val cbgv = CBGV("GV01", "Bui Thanh Nguyen", 30, "Ha Noi", 15000f, 10200f, 200f)
+    val cbgv1 = CBGV("GV02", "Trinh Xuan Mai", 25, "Nam Dinh", 20000f, 10200f, 200f)
 
     listCBGV.add(cbgv)
     listCBGV.add(cbgv1)
 
     do {
-        println("------Chuc nang-------")
+        println("------Quản lý giáo viên-------")
         println("1. Xem danh sach giao vien")
         println("2. Them giao vien")
         println("3. Xoa giao vien")
@@ -24,17 +24,23 @@ fun main() {
 
         when (s) {
             1 -> {
-                getThongTin(listCBGV)
+                for (gv in listCBGV){
+                    println(gv.getThongTin())
+                }
             }
 
             2 -> {
                 addGV(listCBGV)
-                getThongTin(listCBGV)
+                for (gv in listCBGV){
+                    println(gv.getThongTin())
+                }
             }
 
             3 -> {
                 deleteGV(listCBGV)
-                getThongTin(listCBGV)
+                for (gv in listCBGV){
+                    println(gv.getThongTin())
+                }
             }
 
             4 -> {
@@ -44,37 +50,27 @@ fun main() {
             else -> println("Chuc nang khong ton tai")
         }
 
-        print("Ban co muon tiep tuc khong? (y/n): ")
+        print("Bạn có muốn tiếp tục không ? (y/n): ")
         if (readLine().equals("n"))
             break
     } while (true)
 }
 
-fun getThongTin(listCBGV: MutableList<CBGV>) {
-    println("Danh sach giao vien")
-    for (gv in listCBGV) {
-        println(
-            "Ma giao vien: ${gv.maGV}, Ho ten: ${gv.hoTen}, Tuoi: ${gv.tuoi}, Dia chi: ${gv.queQuan}, " +
-                    "Lương cứng: ${gv.luongCung}, Tiền thưởng: ${gv.luongThuong}, Tiền phạt:  ${gv.tienPhat} "
-        )
-    }
-}
-
 fun addGV(listCBGV: MutableList<CBGV>) {
-    print("Nhap ma giao vien: ")
+    print("Nhập mã giáo viên: ")
     var magv = readLine()
-    print("Nhap ho ten giao vien: ")
+    print("Nhập họ tên: ")
     var hoten = readLine()
-    print("Nhap tuoi giao vien: ")
+    print("Nhập tuoi: ")
     var tuoi = readLine()!!.toInt()
-    print("Nhap que quan: ")
+    print("Nhập quê quán: ")
     var quequan = readLine()
-    print("Nhap luong giao vien: ")
-    var luongcung = readLine()!!.toDouble()
-    print("Nhap tien thuong: ")
-    var tienthuong = readLine()!!.toDouble()
-    print("Nhap tien phat: ")
-    var tienphat = readLine()!!.toDouble()
+    print("Nhập lương: ")
+    var luongcung = readLine()!!.toFloat()
+    print("Nhập tien thưởng: ")
+    var tienthuong = readLine()!!.toFloat()
+    print("Nhập tiền phat: ")
+    var tienphat = readLine()!!.toFloat()
 
     val cbgv = CBGV(magv!!, hoten!!, tuoi, quequan!!, luongcung, tienthuong, tienphat)
 
@@ -82,13 +78,13 @@ fun addGV(listCBGV: MutableList<CBGV>) {
 }
 
 fun deleteGV(listCBGV: MutableList<CBGV>) {
-    print("Nhap ma giao vien can xoa: ")
+    print("Nhập mã giáo viên cần xóa: ")
     var magv = readLine()
 
     var check = false
 
     for (gv in listCBGV) {
-        if (gv.maGV.equals(magv)) {
+        if (gv.magv.equals(magv)) {
             listCBGV.remove(gv)
             check = true
             break
@@ -96,11 +92,11 @@ fun deleteGV(listCBGV: MutableList<CBGV>) {
     }
 
     if (check == false)
-        println("Giao vien khong ton tai")
+        println("Giáo viên không tồn tại")
 }
 
 fun luonglinhthuc(listCBGV: MutableList<CBGV>) {
     for (gv in listCBGV) {
-        println("Luong cua giao vien ${gv.hoTen} la: ${gv.luongThucLinh()}")
+        println("Lương của giáo viên ${gv.hoten} là: ${gv.luongthuclinh}")
     }
 }
